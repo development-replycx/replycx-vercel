@@ -3,12 +3,10 @@ export default async function handler(req, res) {
 
   try {
     const s = req.body;
-    const payload = {
-      data: [{
-        phone: s.shipping_address?.phone || s.customer?.default_address?.phone,
-        first_name: s.shipping_address?.first_name || s.customer?.first_name
-      }]
-    };
+    const phone = s.shipping_address?.phone || s.customer?.default_address?.phone;
+    const first_name = s.shipping_address?.first_name || s.customer?.first_name;
+
+    const payload = [{ phone: `+91${phone}`, first_name: first_name }];
 
     console.log("Sending:", JSON.stringify(payload));
 
